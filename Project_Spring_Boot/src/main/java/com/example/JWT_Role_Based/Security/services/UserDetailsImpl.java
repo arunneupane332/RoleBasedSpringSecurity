@@ -1,5 +1,7 @@
 package com.example.JWT_Role_Based.Security.services;
 
+//This class is a custom implementation of the UserDetails interface, used for representing user
+// details and authorities (roles) for authentication and authorization purposes.
 import com.example.JWT_Role_Based.Models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
