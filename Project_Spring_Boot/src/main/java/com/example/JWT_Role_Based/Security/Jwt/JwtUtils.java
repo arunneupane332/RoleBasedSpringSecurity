@@ -21,13 +21,13 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("======================arun=Spring===========================....")
+    @Value("${arun.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("30000")
+    @Value("${arun.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    @Value("arun")
+    @Value("${arun.app.jwtCookieName}")
     private String jwtCookie;
 
     public String getJwtFromCookies(HttpServletRequest request) {
@@ -41,12 +41,12 @@ public class JwtUtils {
 
     public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();//Sets the path for the cookie. The cookie will be sent only for requests to the /API endpoint.
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api/test/").maxAge(24 * 60 * 60).httpOnly(true).build();//Sets the path for the cookie. The cookie will be sent only for requests to the /API endpoint.
         return cookie;
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api/test/").build();
         return cookie;
     }
 
